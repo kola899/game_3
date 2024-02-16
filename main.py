@@ -111,6 +111,7 @@ class Enemy1(pygame.sprite.Sprite):
 
 
     def update(self):
+
         if self.rect.left < 0 or self.rect.right > WIDTH or self.rect.top < 0 or self.rect.bottom > HEIGHT:
             self.speed_x *= -1
             self.speed_y *= -1
@@ -122,34 +123,22 @@ class Enemy1(pygame.sprite.Sprite):
         self.rect.x += self.speed_x
         self.rect.y += self.speed_y
         if pygame.sprite.spritecollide(self,food_group, True):
-            self.pos = self.image = self.rect.center
+            self.pos = self.rect.center
             self.image = pygame.transform.rotozoom(self.image, 0, 1.05)
             self.rect = self.image.get_rect()
             self.rect.center = self.pos
 
 
             self.eyes.pos = self.rect.center
-            self.eyes.image = pygame.transform.rotozoom(self.eyes, 0, 1.05)
+            self.eyes.image = pygame.transform.rotozoom(self.eyes.image, 0, 1.05)
             self.eyes.rect = self.eyes.image.get_rect()
             self.eyes.rect.center = self.eyes.pos
             self.agr = False
 
 
 
-    def eat(self):
-        if pygame.sprite.spritecollide(self, food_group, True):
-            self.image = pygame.transform.rotozoom(self.image, 0, 1.05)
-            self.pos = self.rect.center
-            self.rect = self.image.get_rect()
-            self.rect.center = self.pos
-        if pygame.sprite.spritecollide(self, enemy1_group, False):
-            enemy = pygame.sprite.spritecollide(self, enemy1_group, False)[0]
-            if enemy.image.get_height() <= self.image.get_height():
-                enemy.kill()
-                self.pos = self.rect.center
-                self.image = pygame.transform.rotozoom(self.image, 0, 1.05)
-                self.rect = self.image.get_rect()
-                self.rect.center = self.pos
+
+
 
 
 
